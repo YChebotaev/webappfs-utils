@@ -1,0 +1,21 @@
+#!/bin/bash
+
+MOUNT=`pwd`
+APPNAME=$1
+PROGRAM=$2
+ENVIRONMENT=$3
+GITKEEP=$4
+
+if [ "$ENVIRONMENT" = "--gitkeep" ]
+then
+  GITKEEP="--gitkeep"
+  ENVIRONMENT='local'
+elif [ -z "$ENVIRONMENT" ]; then
+  ENVIRONMENT="local";
+fi
+
+mkdir -p $MOUNT/logs/$PROGRAM/$APPNAME/$ENVIRONMENT
+
+if [ "$GITKEEP" = "--gitkeep" ]; then
+  touch  $MOUNT/logs/$PROGRAM/$APPNAME/$ENVIRONMENT/.gitkeep
+fi

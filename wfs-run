@@ -1,0 +1,21 @@
+#!/bin/bash
+
+MOUNT=`pwd`
+APPNAME=$1
+ENVIRONMENT=$2
+ALL=$2
+COMMAND=${@:3}
+
+function run_command(){
+  echo `cd $MOUNT/apps/$APPNAME/$ENVIRONMENT; $COMMAND`
+}
+
+if [ "$ALL" = "--all" ]
+then
+  cd "$MOUNT/apps/$APPNAME"
+  for ENVIRONMENT in `ls -d */ | cut -f1 -d'/'`; do
+    run_command
+  done
+else
+  run_command
+fi

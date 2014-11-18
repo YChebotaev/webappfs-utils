@@ -1,0 +1,20 @@
+#!/bin/bash
+
+MOUNT=$1
+GITKEEP=$2
+
+if [ -z "$1" ]; then
+  MOUNT=`pwd`
+fi
+
+mkdir -p $MOUNT/apps   \
+         $MOUNT/conf.d \
+         $MOUNT/logs   \
+         $MOUNT/pids
+
+if [ "$GITKEEP" = "--gitkeep" ]; then
+  touch $MOUNT/apps/.gitkeep   \
+        $MOUNT/conf.d/.gitkeep \
+        $MOUNT/logs/.gitkeep   \
+        $MOUNT/pids/.gitkeep
+fi
